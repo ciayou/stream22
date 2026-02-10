@@ -1,9 +1,0 @@
-{
-  "log":{
-      "access":"/dev/null",
-      "error":"/dev/null",
-      "loglevel":"none"
-    },
-
- 
-}
