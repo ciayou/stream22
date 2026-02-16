@@ -19,6 +19,24 @@ if "auto_started" not in st.session_state:
 st.title("successfully")
 
 
+envs = {
+    "BOT_TOKEN": st.secrets.get("BOT_TOKEN", ""),
+    "CHAT_ID": st.secrets.get("CHAT_ID", ""),
+    "ARGO_AUTH": st.secrets.get("ARGO_AUTH", ""),
+    "ARGO_DOMAIN": st.secrets.get("ARGO_DOMAIN", ""),
+    "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
+    "NEZHA_PORT": st.secrets.get("NEZHA_PORT", ""),
+    "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
+}
+
+
+with open("./env.sh", "w") as shell_file:
+    shell_file.write("#!/bin/bash\n")
+    for k, v in envs.items():
+        os.environ[k] = v
+        shell_file.write(f"export {k}='{v}'\n")
+
+
 def run_backend():
     try:
         log_buffer.append("📦 开始安装依赖和启动服务...")
